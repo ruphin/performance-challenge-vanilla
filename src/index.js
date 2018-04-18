@@ -5,6 +5,15 @@ class AppElement extends GluonElement {
   get template() {
     return html`
       <link rel="stylesheet" href="/bootstrap.min.css">
+      <style>
+        :host([loading]) {
+          display: none;
+        }
+      
+        :host {
+          display: block;
+        }
+      </style>
       <div class="container">
         <div class="row">
       
@@ -49,7 +58,7 @@ class AppElement extends GluonElement {
   }
 
   requestStatus() {
-    fetch('http://localhost:3000/api/status')
+    fetch('http://performance-challenge.herokuapp.com/api/status')
       .then(response => {
         if (response.ok) {
           return response.json()
@@ -57,7 +66,10 @@ class AppElement extends GluonElement {
           console.log("ERR")
         }
       })
-      .then(alert => this.setAlert(alert.text, alert.code))
+      .then(alert => {
+        this.removeAttribute('loading')
+        this.setAlert(alert.text, alert.code)
+      })
   }
 
   buttonClickHandler(e) {
@@ -65,7 +77,7 @@ class AppElement extends GluonElement {
     const username = this.$.username.value;
     const password = this.$.password.value;
 
-    fetch('http://localhost:3000/api/login', {
+    fetch('http://performance-challenge.herokuapp.com/api/login', {
       body: JSON.stringify({ username, password }), // must match 'Content-Type' header
       headers: {
         'content-type': 'application/json'
