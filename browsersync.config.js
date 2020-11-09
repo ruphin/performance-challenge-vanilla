@@ -14,7 +14,7 @@ module.exports = {
     }
   },
   server: {
-    baseDir: ['.', 'src'],
+    baseDir: ['src', '.'],
     middleware: [historyApiFallback()]
   },
   files: ['index.html', 'index.js', 'src/**']

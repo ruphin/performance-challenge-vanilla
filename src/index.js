@@ -1,61 +1,67 @@
 import { GluonElement, html } from '../node_modules/gluonjs/gluon.js';
+import './test-nested.js'
 
 class AppElement extends GluonElement {
 
   get template() {
     return html`
-      <link rel="stylesheet" href="/bootstrap.min.css">
-      <style>
-        :host([loading]) {
-          display: none;
-        }
-      
-        :host {
-          display: block;
-        }
-      </style>
-      <div class="container">
-        <div class="row">
-      
-          <div class="col-md-6 offset-md-3" style="margin-top: 2px">
-      
-            <div class="card">
-              <div class="card-header">
-                Login app
-              </div>
-      
-              <div class="card-body">
-                <div id="alert" class="alert" role="alert"></div>
-      
-                <form>
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input id="username" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                  </div>
-      
-                  <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input id="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                  </div>
-      
-                  <button id="button" type="button" class="btn btn-primary">Submit</button>
-      
-                </form>
-      
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    `;
+      <nested-element depth="${ 40}"></nested-element>
+    `
   }
+  // get template() {
+  //   return html`
+  //     <link rel="stylesheet" href="/bootstrap.min.css">
+  //     <style>
+  //       :host([loading]) {
+  //         display: none;
+  //       }
 
-  connectedCallback() {
-    super.connectedCallback();
-    this.$.button.addEventListener('click', (e) => this.buttonClickHandler(e))
-    this.requestStatus();
-  }
+  //       :host {
+  //         display: block;
+  //       }
+  //     </style>
+  //     <div class="container">
+  //       <div class="row">
+
+  //         <div class="col-md-6 offset-md-3" style="margin-top: 2px">
+
+  //           <div class="card">
+  //             <div class="card-header">
+  //               Login app
+  //             </div>
+
+  //             <div class="card-body">
+  //               <div id="alert" class="alert" role="alert"></div>
+
+  //               <form>
+  //                 <div class="form-group">
+  //                   <label for="exampleInputEmail1">Email address</label>
+  //                   <input id="username" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+  //                   <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  //                 </div>
+
+  //                 <div class="form-group">
+  //                   <label for="exampleInputPassword1">Password</label>
+  //                   <input id="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+  //                 </div>
+
+  //                 <button id="button" type="button" class="btn btn-primary">Submit</button>
+
+  //               </form>
+
+  //             </div>
+  //           </div>
+  //         </div>
+  //       </div>
+  //     </div>
+  //   `;
+  // }
+
+  // connectedCallback() {
+  //   super.connectedCallback();
+  //   this.$.button.addEventListener('click', (e) => this.buttonClickHandler(e))
+  //   this.requestStatus();
+  // }
 
   requestStatus() {
     fetch('http://performance-challenge.herokuapp.com/api/status')
