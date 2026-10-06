@@ -1,4 +1,4 @@
-import { GluonElement, html } from '../node_modules/gluonjs/gluon.js';
+import { GluonElement, html } from 'gluonjs/gluon.js';
 
 class AppElement extends GluonElement {
 
